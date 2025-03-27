@@ -1,5 +1,11 @@
 import express from "express";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+
+mongoose
+  .connect("mongodb+srv://admin:wwwwww@cluster0.43lrtqn.mongodb.net/")
+  .then(() => console.log("DB is OK"))
+  .catch(() => console.log("DB error", err));
 
 const app = express();
 
@@ -7,28 +13,8 @@ const PORT = process.env.PORT || 4444;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.post("/auth/login", (req, res) => {
-  console.log(req.body);
-
-  if (req.body.emal === "test@test.ru") {
-    const token = jwt.sign(
-      {
-        email: req.body.email,
-        fullName: "Вася Пупкин",
-      },
-
-      "secret123"
-    );
-  }
-
-  res.json({
-    success: true,
-    token,
-  });
+app.post("/auth/register", (req, res) => {
+  req;
 });
 
 app.listen(PORT, (err) => {
